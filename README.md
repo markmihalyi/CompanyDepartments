@@ -1,1 +1,1 @@
-# CompanyDepartments
+# SzTT HF2: CompanyDepartments
