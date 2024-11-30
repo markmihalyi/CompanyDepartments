@@ -47,8 +47,15 @@
                 return false;
             }
 
-            children.AddRange(components);
-            return true;
+            int componentsAdded = 0;
+            foreach (var component in components)
+            {
+                if (children.Contains(component)) continue;
+
+                children.Add(component);
+                componentsAdded++;
+            }
+            return componentsAdded > 0;
         }
 
         public void Remove(ICompanyComponent component)

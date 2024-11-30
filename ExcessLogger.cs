@@ -3,17 +3,17 @@ namespace CompanyDepartments
 {
     class ExcessLogger : IDepartmentObserver
     {
-        private Department Department { get; set; }
+        private Department department;
 
         public ExcessLogger(Department department)
         {
-            Department = department;
+            this.department = department;
         }
 
         public void Update(List<ICompanyComponent> components)
         {
-            int maxEmployeeCount = Department.MaxEmployeeCount;
-            int currentEmployeeCount = Department.GetEmployeeCount();
+            int maxEmployeeCount = department.MaxEmployeeCount;
+            int currentEmployeeCount = department.GetEmployeeCount();
             int newEmployeeCount = currentEmployeeCount + components.Count;
             Console.WriteLine($"Maximum capacity exceeded by {newEmployeeCount - maxEmployeeCount}.");
         }

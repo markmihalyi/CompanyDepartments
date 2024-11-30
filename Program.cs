@@ -30,11 +30,11 @@ Console.WriteLine("\n");
 
 // 2a: Add an employee
 bool successA = mainDepartment.Add(new List<ICompanyComponent> { new Employee("Dave", DateTime.Now), new Employee("James", DateTime.Now) });
-if (successA) Console.WriteLine("2a) Employees added successfully.");
+if (successA) Console.WriteLine("2a) Employee(s) added successfully.");
 
 // 2b: Attempt to add too many employees
 bool successB = subDepartment.Add(new List<ICompanyComponent> { new Employee("Chris", DateTime.Now), new Employee("Joe", DateTime.Now), new Employee("Peter", DateTime.Now) });
-if (successB) Console.WriteLine("2b) Employees added successfully.");
+if (successB) Console.WriteLine("2b) Employee(s) added successfully.");
 
 Console.WriteLine();
 
