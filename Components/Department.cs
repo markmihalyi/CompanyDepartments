@@ -1,6 +1,6 @@
 ﻿namespace CompanyDepartments.Components
 {
-    class Department : Subject, ICompanyComponent
+    class Department : DepartmentSubject, ICompanyComponent
     {
         private List<ICompanyComponent> children = new List<ICompanyComponent>();
 

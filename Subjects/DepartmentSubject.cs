@@ -1,6 +1,6 @@
 ﻿namespace CompanyDepartments
 {
-    abstract class Subject
+    abstract class DepartmentSubject
     {
         private List<IDepartmentObserver> observers = new List<IDepartmentObserver>();
 
