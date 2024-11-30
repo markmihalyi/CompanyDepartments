@@ -1,4 +1,6 @@
 ﻿using CompanyDepartments;
+using CompanyDepartments.Components;
+using CompanyDepartments.Observers;
 
 // Create employees
 var employee1 = new Employee("Alice", DateTime.Parse("2020-01-15"));

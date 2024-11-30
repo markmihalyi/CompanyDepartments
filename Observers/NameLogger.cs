@@ -1,5 +1,4 @@
-﻿
-namespace CompanyDepartments
+﻿namespace CompanyDepartments.Observers
 {
     class NameLogger : IDepartmentObserver
     {

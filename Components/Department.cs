@@ -1,4 +1,4 @@
-﻿namespace CompanyDepartments
+﻿namespace CompanyDepartments.Components
 {
     class Department : Subject, ICompanyComponent
     {
