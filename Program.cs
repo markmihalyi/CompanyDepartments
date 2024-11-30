@@ -13,6 +13,13 @@ subDepartment.Add([employee1, employee2]);
 var mainDepartment = new Department("ITDepartment", 5);
 mainDepartment.Add([subDepartment, employee3]);
 
+// Create and attach observers to sub-department
+var nameLogger = new NameLogger();
+subDepartment.Attach(nameLogger);
+
+var excessLogger = new ExcessLogger(subDepartment);
+subDepartment.Attach(excessLogger);
+
 // 1: Display details
 Console.WriteLine("[Initial Company Structure]");
 mainDepartment.PrintDetails();
@@ -20,20 +27,14 @@ mainDepartment.PrintDetails();
 Console.WriteLine("\n");
 
 // 2: Add employees
-try
-{
-    // 2a: Add an employee
-    mainDepartment.Add(new List<ICompanyComponent> { new Employee("Dave", DateTime.Now), new Employee("Eve", DateTime.Now) });
-    Console.WriteLine("2a) Employee added successfully.");
 
-    // 2b: Attempt to add too many employees
-    subDepartment.Add(new List<ICompanyComponent> { new Employee("Dave", DateTime.Now), new Employee("Eve", DateTime.Now) });
-    Console.WriteLine("2b) Employee added successfully.");
-}
-catch (InvalidOperationException ex)
-{
-    Console.WriteLine($"Error: {ex.Message}");
-}
+// 2a: Add an employee
+bool successA = mainDepartment.Add(new List<ICompanyComponent> { new Employee("Dave", DateTime.Now), new Employee("James", DateTime.Now) });
+if (successA) Console.WriteLine("2a) Employees added successfully.");
+
+// 2b: Attempt to add too many employees
+bool successB = subDepartment.Add(new List<ICompanyComponent> { new Employee("Chris", DateTime.Now), new Employee("Joe", DateTime.Now), new Employee("Peter", DateTime.Now) });
+if (successB) Console.WriteLine("2b) Employees added successfully.");
 
 Console.WriteLine();
 
@@ -50,7 +51,7 @@ try
 }
 catch (InvalidOperationException ex)
 {
-    Console.WriteLine($"Error: {ex.Message}");
+    Console.WriteLine(ex.Message);
 }
 
 Console.WriteLine("\n");

@@ -1,6 +1,6 @@
 ﻿namespace CompanyDepartments
 {
-    class Employee : ICompanyComponent
+    public class Employee : ICompanyComponent
     {
         public string Name { get; set; }
         public DateTime StartOfEmployment { get; set; }
@@ -13,7 +13,12 @@
 
         public void PrintDetails()
         {
-            Console.WriteLine($"Alkalm._{Name}");
+            Console.WriteLine(this);
+        }
+
+        public override string ToString()
+        {
+            return $"Alkalm._{Name}";
         }
     }
 }

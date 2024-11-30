@@ -1,6 +1,6 @@
 ﻿namespace CompanyDepartments
 {
-    class Department : ICompanyComponent
+    class Department : Subject, ICompanyComponent
     {
         private List<ICompanyComponent> children = new List<ICompanyComponent>();
 
@@ -13,9 +13,16 @@
             MaxEmployeeCount = maxEmployeeCount;
         }
 
+        public int GetEmployeeCount()
+        {
+            return children.Sum(child =>
+                child is Employee ? 1 :
+                child is Department department ? department.GetEmployeeCount() : 0);
+        }
+
         public void PrintDetails()
         {
-            Console.WriteLine($"Részleg_{Name}");
+            Console.WriteLine(this);
 
             foreach (var child in children)
             {
@@ -23,27 +30,25 @@
             }
         }
 
-        private int GetEmployeeCount()
+        public override string ToString()
         {
-            return children.Sum(child =>
-                child is Employee ? 1 :
-                child is Department department ? department.GetEmployeeCount() : 0);
+            return $"Részleg_{Name}";
         }
 
-
         #region Child Component Management
-        public void Add(List<ICompanyComponent> components)
+        public bool Add(List<ICompanyComponent> components)
         {
             int currentEmployeeCount = GetEmployeeCount();
             int newEmployeeCount = currentEmployeeCount + components.Count;
 
             if (newEmployeeCount > MaxEmployeeCount)
             {
-                string errorMessage = $"Cannot add component: maximum capacity of {MaxEmployeeCount} exceeded. Current: {currentEmployeeCount}, Attempted: {newEmployeeCount}";
-                throw new InvalidOperationException(errorMessage);
+                NotifyObservers(components);
+                return false;
             }
 
             children.AddRange(components);
+            return true;
         }
 
         public void Remove(ICompanyComponent component)
